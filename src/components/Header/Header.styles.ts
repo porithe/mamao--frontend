@@ -8,6 +8,10 @@ export const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   padding: 0 1.8rem;
+  @media (min-width: 768px) {
+    height: 100px;
+    padding: 0 2.5rem;
+  }
 `;
 
 export const StyledLink = styled(Link)`
@@ -15,4 +19,7 @@ export const StyledLink = styled(Link)`
   font-size: 1.2rem;
   text-decoration: none;
   font-weight: 600;
+  @media (min-width: 768px) {
+    font-size: 1.4rem;
+  }
 `;

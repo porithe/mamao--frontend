@@ -1,9 +1,10 @@
 import React from 'react';
+import { StyledHome, StyledTitle } from './Home.styles';
 
 const Home = () => (
-  <div>
-    <h1>home</h1>
-  </div>
+  <StyledHome>
+    <StyledTitle>Start using mamao today!</StyledTitle>
+  </StyledHome>
 );
 
 export default Home;
