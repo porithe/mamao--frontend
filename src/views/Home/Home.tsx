@@ -1,10 +1,17 @@
 import React from 'react';
-import { StyledHome, StyledTitle } from './Home.styles';
+import { AuthWrapper, StyledHome, StyledText, StyledWrapper } from './Home.styles';
+import useAuthView from '../../utils/useAuthView';
 
-const Home = () => (
-  <StyledHome>
-    <StyledTitle>Start using mamao today!</StyledTitle>
-  </StyledHome>
-);
+const Home = () => {
+  const { currentView, renderAuthView } = useAuthView();
+  return (
+    <StyledHome>
+      <AuthWrapper>{renderAuthView(currentView)}</AuthWrapper>
+      <StyledWrapper>
+        <StyledText>See what’s happen’ in the world right now!</StyledText>
+      </StyledWrapper>
+    </StyledHome>
+  );
+};
 
 export default Home;

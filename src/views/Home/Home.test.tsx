@@ -9,6 +9,16 @@ test('should render correct text in home view', () => {
       <Home />
     </Router>,
   );
+  expect(getByText('Join mamao today!')).toBeTruthy();
+  expect(getByText('See what’s happen’ in the world right now!')).toBeTruthy();
+});
 
-  expect(getByText('Start using mamao today!')).toBeTruthy();
+test('should render two auth links', () => {
+  const { getByText } = render(
+    <Router>
+      <Home />
+    </Router>,
+  );
+  expect(getByText('Sing up')).toBeTruthy();
+  expect(getByText('Log in')).toBeTruthy();
 });

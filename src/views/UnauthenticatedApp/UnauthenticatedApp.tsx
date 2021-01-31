@@ -1,6 +1,6 @@
 import React from 'react';
-import UnauthenticatedRouter from '../../router/UnauthenticatedRouter';
+import Home from '../Home/Home';
 
-const UnauthenticatedApp = () => <UnauthenticatedRouter />;
+const UnauthenticatedApp = () => <Home />;
 
 export default UnauthenticatedApp;

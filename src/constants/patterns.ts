@@ -1,0 +1,2 @@
+// eslint-disable-next-line import/prefer-default-export
+export const emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g;
