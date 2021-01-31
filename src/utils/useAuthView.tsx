@@ -5,16 +5,16 @@ import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
 
 export enum VIEWS {
-  HOME = 'HOME',
+  DEFAULT = '',
   REGISTER = 'REGISTER',
   LOGIN = 'LOGIN',
 }
 
 const useAuthView = () => {
-  const [currentView, setCurrentView] = useState<VIEWS>(VIEWS.HOME);
+  const [currentView, setCurrentView] = useState<VIEWS>(VIEWS.DEFAULT);
   const renderAuthView = (view: VIEWS) => {
     switch (view) {
-      case VIEWS.HOME:
+      default:
         return (
           <>
             <StyledTitle>Join mamao today!</StyledTitle>
@@ -26,8 +26,6 @@ const useAuthView = () => {
         return <Login />;
       case VIEWS.REGISTER:
         return <Register />;
-      default:
-        return null;
     }
   };
   return {
