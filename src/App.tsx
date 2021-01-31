@@ -1,7 +1,9 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 import COLORS from './constants/colors';
 import UnauthenticatedApp from './views/UnauthenticatedApp/UnauthenticatedApp';
+import Header from './components/Header/Header';
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -10,9 +12,12 @@ const AppWrapper = styled.div`
 `;
 
 const App = () => (
-  <AppWrapper>
-    <UnauthenticatedApp />
-  </AppWrapper>
+  <Router>
+    <AppWrapper>
+      <Header />
+      <UnauthenticatedApp />
+    </AppWrapper>
+  </Router>
 );
 
 export default App;

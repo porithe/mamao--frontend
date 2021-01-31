@@ -40,5 +40,16 @@
                 "extensions": [".js",".jsx",".ts",".tsx"]
             }
         }
-    }
+    },
+    "overrides": [
+        {
+            "files": [
+                "**/*.test.ts",
+                "**/*.test.tsx"
+            ],
+            "env": {
+                "jest": true
+            }
+        }
+    ]
 }
