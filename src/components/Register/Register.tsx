@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import {
   AuthInput,
@@ -8,6 +9,10 @@ import {
 } from '../../views/Home/Home.styles';
 import AuthButton from '../AuthButton/AuthButton';
 import { emailPattern } from '../../constants/patterns';
+import authApi, { RegisterData } from '../../api/auth';
+import 'react-toastify/dist/ReactToastify.css';
+import '../../assets/styles/toastify.css';
+import { TOAST_MESSAGES, toastifyOptions } from '../../constants/toastify';
 
 type Inputs = {
   username: string;
@@ -22,9 +27,21 @@ type RegisterProps = {
 
 const Register = ({ setView }: RegisterProps) => {
   const { register, handleSubmit, errors, watch } = useForm<Inputs>();
-  const onSubmit = (values: Inputs) => console.log(values);
+  const singUp = async (userData: RegisterData) => {
+    try {
+      await authApi.register(userData);
+      toast.success(TOAST_MESSAGES.CREATEAD_ACCOUNT, toastifyOptions);
+    } catch (err) {
+      toast.error(TOAST_MESSAGES.GLOBAL_ERROR, toastifyOptions);
+    }
+  };
+  const onSubmit = async (values: Inputs) => {
+    const { repeatedPassword, ...rest } = values;
+    await singUp(rest);
+  };
   return (
     <>
+      <ToastContainer />
       <StyledTitle>Join us!</StyledTitle>
       <AuthInput
         name="username"
