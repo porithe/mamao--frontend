@@ -1,6 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { AuthInput } from '../../assets/styles/global.styles';
+import {
+  AuthInput,
+  RedirectButton,
+  RedirectMessage,
+  StyledTitle,
+} from '../../views/Home/Home.styles';
 import AuthButton from '../AuthButton/AuthButton';
 import { emailPattern } from '../../constants/patterns';
 
@@ -11,11 +16,16 @@ type Inputs = {
   repeatedPassword: string;
 };
 
-const Register = () => {
+type RegisterProps = {
+  setView: () => void;
+};
+
+const Register = ({ setView }: RegisterProps) => {
   const { register, handleSubmit, errors, watch } = useForm<Inputs>();
   const onSubmit = (values: Inputs) => console.log(values);
   return (
     <>
+      <StyledTitle>Join us!</StyledTitle>
       <AuthInput
         name="username"
         placeholder="Username"
@@ -49,6 +59,10 @@ const Register = () => {
         data-testid="repeatedPassword-inp"
       />
       <AuthButton name="Sing up" isMain callback={handleSubmit(onSubmit)} marginTop="2rem" />
+      <RedirectMessage>
+        Already have an account?
+        <RedirectButton onClick={setView}>Log in</RedirectButton>
+      </RedirectMessage>
     </>
   );
 };

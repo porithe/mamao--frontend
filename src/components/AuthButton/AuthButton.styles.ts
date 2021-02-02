@@ -29,7 +29,12 @@ export const StyledAuthButton = styled.button<StyledAuthButtonProps>`
   :focus {
     transform: scale(0.97);
   }
-  @media (min-width: 768px) {
+  @media (min-width: 768px) and (max-width: 1280px) {
+    width: 300px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+  @media (min-width: 1281px) {
     width: 320px;
     height: 50px;
     font-size: 1.3rem;

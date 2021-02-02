@@ -23,9 +23,9 @@ const useAuthView = () => {
           </>
         );
       case VIEWS.LOGIN:
-        return <Login />;
+        return <Login setView={() => setCurrentView(VIEWS.REGISTER)} />;
       case VIEWS.REGISTER:
-        return <Register />;
+        return <Register setView={() => setCurrentView(VIEWS.LOGIN)} />;
     }
   };
   return {

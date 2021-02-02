@@ -1,6 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { AuthInput } from '../../assets/styles/global.styles';
+import {
+  AuthInput,
+  RedirectButton,
+  RedirectMessage,
+  StyledTitle,
+} from '../../views/Home/Home.styles';
 import AuthButton from '../AuthButton/AuthButton';
 
 type Inputs = {
@@ -8,11 +13,16 @@ type Inputs = {
   password: string;
 };
 
-const Login = () => {
+type LoginProps = {
+  setView: () => void;
+};
+
+const Login = ({ setView }: LoginProps) => {
   const { register, handleSubmit, errors } = useForm<Inputs>();
   const onSubmit = (values: Inputs) => console.log(values);
   return (
     <>
+      <StyledTitle>Welcome back!</StyledTitle>
       <AuthInput
         name="username"
         placeholder="Username"
@@ -30,6 +40,10 @@ const Login = () => {
         data-testid="password-inp"
       />
       <AuthButton name="Log in" isMain callback={handleSubmit(onSubmit)} marginTop="2rem" />
+      <RedirectMessage>
+        Don&apos;t have an account?
+        <RedirectButton onClick={setView}>Sing up</RedirectButton>
+      </RedirectMessage>
     </>
   );
 };
