@@ -1,5 +1,6 @@
 import React from 'react';
-import { act, fireEvent, render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Login from './Login';
 import COLORS from '../../constants/colors';
 
@@ -21,15 +22,11 @@ test('should change border color to red when length validation error', async () 
   const usernameInp = getByTestId('username-inp');
   const passwordInp = getByTestId('password-inp');
   const submitBtn = getByText('Log in');
-  await act(async () => {
-    fireEvent.input(usernameInp, { target: { value: 'qw' } });
-    fireEvent.input(passwordInp, { target: { value: 'qwe' } });
-  });
-  await act(async () => {
-    fireEvent.click(submitBtn);
-  });
-  expect(usernameInp).toHaveStyle(`border-color: ${COLORS.RED}`);
-  expect(passwordInp).toHaveStyle(`border-color: ${COLORS.RED}`);
+  userEvent.type(usernameInp, 'qw');
+  userEvent.type(passwordInp, 'qw');
+  userEvent.click(submitBtn);
+  await waitFor(() => expect(usernameInp).toHaveStyle(`border-color: ${COLORS.RED}`));
+  await waitFor(() => expect(passwordInp).toHaveStyle(`border-color: ${COLORS.RED}`));
 });
 
 test('should change border color to red when required validation error', async () => {
@@ -37,15 +34,11 @@ test('should change border color to red when required validation error', async (
   const usernameInp = getByTestId('username-inp');
   const passwordInp = getByTestId('password-inp');
   const submitBtn = getByText('Log in');
-  await act(async () => {
-    fireEvent.input(usernameInp, { target: { value: '' } });
-    fireEvent.input(passwordInp, { target: { value: '' } });
-  });
-  await act(async () => {
-    fireEvent.click(submitBtn);
-  });
-  expect(usernameInp).toHaveStyle(`border-color: ${COLORS.RED}`);
-  expect(passwordInp).toHaveStyle(`border-color: ${COLORS.RED}`);
+  userEvent.type(usernameInp, '');
+  userEvent.type(passwordInp, '');
+  userEvent.click(submitBtn);
+  await waitFor(() => expect(usernameInp).toHaveStyle(`border-color: ${COLORS.RED}`));
+  await waitFor(() => expect(passwordInp).toHaveStyle(`border-color: ${COLORS.RED}`));
 });
 
 test('should has purple border color when no validation errors', async () => {
@@ -53,13 +46,9 @@ test('should has purple border color when no validation errors', async () => {
   const usernameInp = getByTestId('username-inp');
   const passwordInp = getByTestId('password-inp');
   const submitBtn = getByText('Log in');
-  await act(async () => {
-    fireEvent.input(usernameInp, { target: { value: 'qwerty' } });
-    fireEvent.input(passwordInp, { target: { value: 'qwerqwer' } });
-  });
-  await act(async () => {
-    fireEvent.click(submitBtn);
-  });
-  expect(usernameInp).toHaveStyle(`border-color: ${COLORS.PURPLE}`);
-  expect(passwordInp).toHaveStyle(`border-color: ${COLORS.PURPLE}`);
+  userEvent.type(usernameInp, 'qwertyu');
+  userEvent.type(passwordInp, 'qwerqwer');
+  userEvent.click(submitBtn);
+  await waitFor(() => expect(usernameInp).toHaveStyle(`border-color: ${COLORS.PURPLE}`));
+  await waitFor(() => expect(passwordInp).toHaveStyle(`border-color: ${COLORS.PURPLE}`));
 });

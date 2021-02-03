@@ -151,6 +151,7 @@ export const RedirectButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+  outline: none;
   @media (min-width: 768px) and (max-width: 1280px) {
     font-size: 1rem;
   }

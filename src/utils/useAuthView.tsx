@@ -3,12 +3,7 @@ import { StyledTitle } from '../views/Home/Home.styles';
 import AuthButton from '../components/AuthButton/AuthButton';
 import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
-
-export enum VIEWS {
-  DEFAULT = '',
-  REGISTER = 'REGISTER',
-  LOGIN = 'LOGIN',
-}
+import VIEWS from '../constants/authview';
 
 const useAuthView = () => {
   const [currentView, setCurrentView] = useState<VIEWS>(VIEWS.DEFAULT);
@@ -25,7 +20,7 @@ const useAuthView = () => {
       case VIEWS.LOGIN:
         return <Login setView={() => setCurrentView(VIEWS.REGISTER)} />;
       case VIEWS.REGISTER:
-        return <Register setView={() => setCurrentView(VIEWS.LOGIN)} />;
+        return <Register setView={setCurrentView} />;
     }
   };
   return {

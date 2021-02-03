@@ -13,6 +13,7 @@ import authApi, { RegisterData } from '../../api/auth';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../assets/styles/toastify.css';
 import { TOAST_MESSAGES, toastifyOptions } from '../../constants/toastify';
+import VIEWS from '../../constants/authview';
 
 type Inputs = {
   username: string;
@@ -22,7 +23,7 @@ type Inputs = {
 };
 
 type RegisterProps = {
-  setView: () => void;
+  setView: any;
 };
 
 const Register = ({ setView }: RegisterProps) => {
@@ -31,6 +32,7 @@ const Register = ({ setView }: RegisterProps) => {
     try {
       await authApi.register(userData);
       toast.success(TOAST_MESSAGES.CREATEAD_ACCOUNT, toastifyOptions);
+      setView(VIEWS.LOGIN);
     } catch (err) {
       toast.error(TOAST_MESSAGES.GLOBAL_ERROR, toastifyOptions);
     }
@@ -78,7 +80,7 @@ const Register = ({ setView }: RegisterProps) => {
       <AuthButton name="Sing up" isMain callback={handleSubmit(onSubmit)} marginTop="2rem" />
       <RedirectMessage>
         Already have an account?
-        <RedirectButton onClick={setView}>Log in</RedirectButton>
+        <RedirectButton onClick={() => setView(VIEWS.LOGIN)}>Log in</RedirectButton>
       </RedirectMessage>
     </>
   );
