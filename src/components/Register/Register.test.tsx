@@ -1,17 +1,22 @@
 import React from 'react';
-import { render, act, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import userEvent from '@testing-library/user-event';
 import Register from './Register';
 import COLORS from '../../constants/colors';
 import { TOAST_MESSAGES } from '../../constants/toastify';
+import { AuthProvider } from '../../context/authContext';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 const setViewMock = () => {};
 
 test('should render register component correctly', () => {
-  const { getByTestId, getByText } = render(<Register setView={setViewMock} />);
+  const { getByTestId, getByText } = render(
+    <AuthProvider>
+      <Register setView={setViewMock} />
+    </AuthProvider>,
+  );
 
   expect(getByText('Join us!')).toBeTruthy();
   expect(getByTestId('username-inp')).toBeTruthy();
@@ -24,7 +29,11 @@ test('should render register component correctly', () => {
 });
 
 test('should check if repeatedPassword is same as password', async () => {
-  const { getByTestId, getByText } = render(<Register setView={setViewMock} />);
+  const { getByTestId, getByText } = render(
+    <AuthProvider>
+      <Register setView={setViewMock} />
+    </AuthProvider>,
+  );
   const passwordInp = getByTestId('password-inp');
   const repeatedPasswordInp = getByTestId('repeatedPassword-inp');
   const submitBtn = getByText('Sing up');
@@ -35,7 +44,11 @@ test('should check if repeatedPassword is same as password', async () => {
 });
 
 test('should change border color to red when length validation error', async () => {
-  const { getByTestId, getByText } = render(<Register setView={setViewMock} />);
+  const { getByTestId, getByText } = render(
+    <AuthProvider>
+      <Register setView={setViewMock} />
+    </AuthProvider>,
+  );
   const usernameInp = getByTestId('username-inp');
   const emailInp = getByTestId('email-inp');
   const passwordInp = getByTestId('password-inp');
@@ -50,7 +63,11 @@ test('should change border color to red when length validation error', async () 
 });
 
 test('should change border color to red when required validation error', async () => {
-  const { getByTestId, getByText } = render(<Register setView={setViewMock} />);
+  const { getByTestId, getByText } = render(
+    <AuthProvider>
+      <Register setView={setViewMock} />
+    </AuthProvider>,
+  );
   const usernameInp = getByTestId('username-inp');
   const emailInp = getByTestId('email-inp');
   const passwordInp = getByTestId('password-inp');
@@ -65,7 +82,11 @@ test('should change border color to red when required validation error', async (
 });
 
 test('should has purple border color when no validation errors', async () => {
-  const { getByTestId, getByText } = render(<Register setView={setViewMock} />);
+  const { getByTestId, getByText } = render(
+    <AuthProvider>
+      <Register setView={setViewMock} />
+    </AuthProvider>,
+  );
   const usernameInp = getByTestId('username-inp');
   const emailInp = getByTestId('email-inp');
   const passwordInp = getByTestId('password-inp');
@@ -84,7 +105,11 @@ test('should has purple border color when no validation errors', async () => {
 
 test('should show successfully registered toast', async () => {
   await mockedAxios.post.mockResolvedValue({ username: 'qwerty' });
-  const { getByTestId, getByText, findByText } = render(<Register setView={setViewMock} />);
+  const { getByTestId, getByText, findByText } = render(
+    <AuthProvider>
+      <Register setView={setViewMock} />
+    </AuthProvider>,
+  );
   const usernameInp = getByTestId('username-inp');
   const emailInp = getByTestId('email-inp');
   const passwordInp = getByTestId('password-inp');
@@ -94,15 +119,17 @@ test('should show successfully registered toast', async () => {
   userEvent.type(emailInp, 'qwerqwer@qwer.qwer');
   userEvent.type(passwordInp, 'qwerqwer');
   userEvent.type(repeatedPasswordInp, 'qwerqwer');
-  await act(async () => {
-    userEvent.click(submitBtn);
-  });
+  userEvent.click(submitBtn);
   await expect(findByText(TOAST_MESSAGES.CREATEAD_ACCOUNT)).toBeTruthy();
 });
 
 test('should show global error toast', async () => {
   await mockedAxios.post.mockRejectedValue('rejected');
-  const { getByTestId, getByText, findByText } = render(<Register setView={setViewMock} />);
+  const { getByTestId, getByText, findByText } = render(
+    <AuthProvider>
+      <Register setView={setViewMock} />
+    </AuthProvider>,
+  );
   const usernameInp = getByTestId('username-inp');
   const emailInp = getByTestId('email-inp');
   const passwordInp = getByTestId('password-inp');

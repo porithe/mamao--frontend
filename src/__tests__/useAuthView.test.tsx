@@ -1,7 +1,7 @@
 import React from 'react';
 import { act, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import useAuthView from '../utils/useAuthView';
+import useAuthView from '../utils/auth/useAuthView';
 
 const MockAuthView = () => {
   const { renderAuthView, currentView } = useAuthView();

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   AuthInput,
@@ -7,6 +7,7 @@ import {
   StyledTitle,
 } from '../../views/Home/Home.styles';
 import AuthButton from '../AuthButton/AuthButton';
+import { AuthContext } from '../../context/authContext';
 
 type Inputs = {
   username: string;
@@ -19,7 +20,10 @@ type LoginProps = {
 
 const Login = ({ setView }: LoginProps) => {
   const { register, handleSubmit, errors } = useForm<Inputs>();
-  const onSubmit = (values: Inputs) => console.log(values);
+  const authContext = useContext(AuthContext);
+  const onSubmit = async (values: Inputs) => {
+    await authContext.login(values);
+  };
   return (
     <>
       <StyledTitle>Welcome back!</StyledTitle>

@@ -1,5 +1,4 @@
-import React from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   AuthInput,
@@ -9,11 +8,10 @@ import {
 } from '../../views/Home/Home.styles';
 import AuthButton from '../AuthButton/AuthButton';
 import { emailPattern } from '../../constants/patterns';
-import authApi, { RegisterData } from '../../api/auth';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../assets/styles/toastify.css';
-import { TOAST_MESSAGES, toastifyOptions } from '../../constants/toastify';
 import VIEWS from '../../constants/authview';
+import { AuthContext } from '../../context/authContext';
 
 type Inputs = {
   username: string;
@@ -28,22 +26,14 @@ type RegisterProps = {
 
 const Register = ({ setView }: RegisterProps) => {
   const { register, handleSubmit, errors, watch } = useForm<Inputs>();
-  const singUp = async (userData: RegisterData) => {
-    try {
-      await authApi.register(userData);
-      toast.success(TOAST_MESSAGES.CREATEAD_ACCOUNT, toastifyOptions);
-      setView(VIEWS.LOGIN);
-    } catch (err) {
-      toast.error(TOAST_MESSAGES.GLOBAL_ERROR, toastifyOptions);
-    }
-  };
+  const authContext = useContext(AuthContext);
   const onSubmit = async (values: Inputs) => {
     const { repeatedPassword, ...rest } = values;
-    await singUp(rest);
+    await authContext.singUp(rest);
+    setView(VIEWS.LOGIN);
   };
   return (
     <>
-      <ToastContainer />
       <StyledTitle>Join us!</StyledTitle>
       <AuthInput
         name="username"

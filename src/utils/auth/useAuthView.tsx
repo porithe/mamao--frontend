@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { StyledTitle } from '../views/Home/Home.styles';
-import AuthButton from '../components/AuthButton/AuthButton';
-import Login from '../components/Login/Login';
-import Register from '../components/Register/Register';
-import VIEWS from '../constants/authview';
+import { StyledTitle } from '../../views/Home/Home.styles';
+import AuthButton from '../../components/AuthButton/AuthButton';
+import Login from '../../components/Login/Login';
+import Register from '../../components/Register/Register';
+import VIEWS from '../../constants/authview';
 
 const useAuthView = () => {
   const [currentView, setCurrentView] = useState<VIEWS>(VIEWS.DEFAULT);

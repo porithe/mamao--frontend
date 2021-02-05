@@ -11,4 +11,6 @@ export const toastifyOptions: any = {
 export enum TOAST_MESSAGES {
   GLOBAL_ERROR = 'Ups... Something goes wrong!',
   CREATEAD_ACCOUNT = 'Account has been successfully created.',
+  UNAUTHORIZED = 'Unauthorized!',
+  USER_NOT_FOUND = 'User not found!',
 }

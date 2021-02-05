@@ -7,6 +7,7 @@ export const StyledHeader = styled.header`
   height: 80px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 1.8rem;
   @media (min-width: 768px) {
     height: 100px;
@@ -21,5 +22,21 @@ export const StyledLink = styled(Link)`
   font-weight: 600;
   @media (min-width: 768px) {
     font-size: 1.4rem;
+  }
+`;
+
+export const LogoutButton = styled.button`
+  border: 2px solid ${COLORS.PURPLE};
+  border-radius: 8px;
+  padding: 0.3125rem 0.625rem;
+  background-color: transparent;
+  color: ${COLORS.PURPLE};
+  font-weight: 700;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+    padding: 0.4rem 1.2rem;
   }
 `;
