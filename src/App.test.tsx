@@ -13,7 +13,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 test('should render correct text in header link', () => {
   const { getByText } = render(
-    <AuthContext.Provider value={{ state: { status: AuthStatuses.PENDING } }}>
+    <AuthContext.Provider value={{ state: { status: AuthStatuses.SUCCESS } }}>
       <App />
     </AuthContext.Provider>,
   );
