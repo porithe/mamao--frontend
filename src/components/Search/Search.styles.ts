@@ -50,6 +50,7 @@ export const UserList = styled.ul`
   left: 0;
   width: 100%;
   list-style-type: none;
+  z-index: 5;
 `;
 
 export const UserItem = styled.li`

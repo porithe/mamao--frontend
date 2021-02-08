@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import COLORS from '../../constants/colors';
 
 export const StyledHeader = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 80px;
   display: flex;
