@@ -25,6 +25,8 @@ const Search = () => {
   useEffect(() => {
     if (debouncedUsername.length > 3) {
       getUsers();
+    } else {
+      setResponseData([]);
     }
   }, [debouncedUsername]);
   return (

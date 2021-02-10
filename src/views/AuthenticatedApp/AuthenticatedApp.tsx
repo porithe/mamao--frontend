@@ -5,6 +5,7 @@ import { QueryClientProvider, QueryClient } from 'react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Routes from '../../components/Routes/Routes';
+import Search from '../../components/Search/Search';
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const AuthenticatedApp = () => (
       <ToastContainer />
       <Header />
       <QueryClientProvider client={queryClient}>
+        <Search />
         <Routes />
       </QueryClientProvider>
     </StyledAuthenticatedApp>

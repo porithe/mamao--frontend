@@ -13,6 +13,7 @@ type AuthProviderProps = {
 type State = {
   state: {
     status: string;
+    username: string;
   };
   login: ({ username, password }: LoginData) => Promise<void>;
   logout: () => void;
@@ -22,17 +23,16 @@ type State = {
 const AuthContext = React.createContext<State>({} as State);
 
 function AuthProvider({ children }: AuthProviderProps) {
-  const [state, setState] = React.useState({ status: AuthStatuses.SUCCESS });
+  const [state, setState] = React.useState({ status: AuthStatuses.PENDING, username: '' });
   useEffect(() => {
     const isUserSignedIn = isAuthenticated();
     if (isUserSignedIn) {
       setState({
         status: AuthStatuses.SUCCESS,
+        username: localStorage.getItem(LocalStorage.USERNAME) || '',
       });
     } else {
-      setState({
-        status: AuthStatuses.UNAUTHORIZED,
-      });
+      setState((prev) => ({ ...prev, status: AuthStatuses.UNAUTHORIZED }));
     }
   }, []);
   const singUp = async (userData: RegisterData) => {
@@ -47,18 +47,20 @@ function AuthProvider({ children }: AuthProviderProps) {
     try {
       const { data } = await authApi.login({ username, password });
       localStorage.setItem(LocalStorage.TOKEN, data.accessToken);
+      localStorage.setItem(LocalStorage.USERNAME, username);
       setState({
         status: AuthStatuses.SUCCESS,
+        username,
       });
     } catch (err) {
       if (err?.response?.status === 401) {
-        setState({ status: AuthStatuses.UNAUTHORIZED });
+        setState((prev) => ({ ...prev, status: AuthStatuses.UNAUTHORIZED }));
         toast.error(TOAST_MESSAGES.UNAUTHORIZED, toastifyOptions);
       } else if (err?.response?.status === 404) {
-        setState({ status: AuthStatuses.ERROR });
+        setState((prev) => ({ ...prev, status: AuthStatuses.ERROR }));
         toast.error(TOAST_MESSAGES.USER_NOT_FOUND, toastifyOptions);
       } else {
-        setState({ status: AuthStatuses.ERROR });
+        setState((prev) => ({ ...prev, status: AuthStatuses.ERROR }));
         toast.error(TOAST_MESSAGES.GLOBAL_ERROR, toastifyOptions);
       }
     }
@@ -66,8 +68,10 @@ function AuthProvider({ children }: AuthProviderProps) {
   const logout = (): void => {
     setState({
       status: AuthStatuses.PENDING,
+      username: '',
     });
     localStorage.removeItem(LocalStorage.TOKEN);
+    localStorage.removeItem(LocalStorage.USERNAME);
   };
   return (
     <AuthContext.Provider value={{ state, login, logout, singUp }}>{children}</AuthContext.Provider>
@@ -81,12 +85,14 @@ function useAuthState() {
   const isError = state.status === AuthStatuses.ERROR;
   const isUnauthorizedError = state.status === AuthStatuses.UNAUTHORIZED;
   const isUserAuthenticated = isSuccess;
+  const { username } = state;
   return {
     isPending,
     isSuccess,
     isError,
     isUserAuthenticated,
     isUnauthorizedError,
+    username,
   };
 }
 

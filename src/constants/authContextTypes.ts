@@ -7,4 +7,5 @@ export enum AuthStatuses {
 
 export enum LocalStorage {
   TOKEN = 'TOKEN',
+  USERNAME = 'USERNAME',
 }

@@ -7,7 +7,7 @@ type InputProps = {
 };
 
 export const Wrapper = styled.div`
-  margin: 1rem auto 0 auto;
+  margin: 1.8rem auto 0 auto;
   width: 275px;
   height: 40px;
   position: relative;

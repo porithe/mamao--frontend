@@ -19,4 +19,9 @@ export default {
       `${process.env.REACT_APP_MAMAO_BACKEND_API}post/dislike/${postUuid}`,
     );
   },
+  findAll(username: string) {
+    return authenticatedAxios.get(
+      `${process.env.REACT_APP_MAMAO_BACKEND_API}post/findAll/${username}?limit=10&start=0`,
+    );
+  },
 };

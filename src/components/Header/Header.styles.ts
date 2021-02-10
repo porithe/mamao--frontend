@@ -12,6 +12,8 @@ export const StyledHeader = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 0 1.8rem;
+  background-color: ${COLORS.WHITE};
+  z-index: 10;
   @media (min-width: 768px) {
     height: 100px;
     padding: 0 2.5rem;

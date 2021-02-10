@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
-import { useMutation, useQuery } from 'react-query';
-import { toast } from 'react-toastify';
 import {
   Avatar,
   Date,
@@ -18,8 +16,7 @@ import {
   StyledLikeRedSVG,
   StyledLikeSVG,
 } from './Post.styles';
-import postApi from '../../api/post';
-import { TOAST_MESSAGES, toastifyOptions } from '../../constants/toastify';
+import usePost from '../../utils/usePost';
 
 export type PostType = {
   author: {
@@ -40,32 +37,11 @@ type PostProps = {
 };
 
 const Post = ({ postData }: PostProps) => {
-  const [isLiked, setIsLiked] = useState(postData.isLiked);
-  const [likeCount, setLikeCount] = useState(postData.likeCount);
-  const { mutateAsync: mutateLike } = useMutation('likePost', () =>
-    postApi.likePost(postData.uuid),
+  const { isLiked, likeCount, handleLike, handleDisLike } = usePost(
+    postData.isLiked,
+    postData.likeCount,
+    postData.uuid,
   );
-  const { mutateAsync: mutateDisLike } = useMutation('disLikePost', () =>
-    postApi.disLikePost(postData.uuid),
-  );
-  const handleLike = async () => {
-    try {
-      await mutateLike();
-      setIsLiked(true);
-      setLikeCount((prev) => prev + 1);
-    } catch {
-      toast.error(TOAST_MESSAGES.GLOBAL_ERROR, toastifyOptions);
-    }
-  };
-  const handleDisLike = async () => {
-    try {
-      await mutateDisLike();
-      setIsLiked(false);
-      setLikeCount((prev) => prev - 1);
-    } catch {
-      toast.error(TOAST_MESSAGES.GLOBAL_ERROR, toastifyOptions);
-    }
-  };
   return (
     <PostItem>
       <Avatar />
