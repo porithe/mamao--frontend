@@ -1,0 +1,79 @@
+import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import {
+  AuthInput,
+  RedirectButton,
+  RedirectMessage,
+  StyledTitle,
+} from '../../views/Home/Home.styles';
+import AuthButton from '../AuthButton/AuthButton';
+import { emailPattern } from '../../constants/patterns';
+import 'react-toastify/dist/ReactToastify.css';
+import '../../assets/styles/toastify.css';
+import VIEWS from '../../constants/authview';
+import { AuthContext } from '../../context/authContext';
+
+type Inputs = {
+  username: string;
+  email: string;
+  password: string;
+  repeatedPassword: string;
+};
+
+type RegisterProps = {
+  setView: any;
+};
+
+const Register = ({ setView }: RegisterProps) => {
+  const { register, handleSubmit, errors, watch } = useForm<Inputs>();
+  const authContext = useContext(AuthContext);
+  const onSubmit = async (values: Inputs) => {
+    const { repeatedPassword, ...rest } = values;
+    await authContext.singUp(rest);
+    setView(VIEWS.LOGIN);
+  };
+  return (
+    <>
+      <StyledTitle>Join us!</StyledTitle>
+      <AuthInput
+        name="username"
+        placeholder="Username"
+        type="text"
+        ref={register({ required: true, minLength: 4, maxLength: 24 })}
+        $isError={!!errors.username}
+        data-testid="username-inp"
+      />
+      <AuthInput
+        name="email"
+        placeholder="E-mail"
+        type="text"
+        ref={register({ required: true, pattern: emailPattern })}
+        $isError={!!errors.email}
+        data-testid="email-inp"
+      />
+      <AuthInput
+        name="password"
+        placeholder="Password"
+        type="password"
+        ref={register({ required: true, minLength: 8, maxLength: 32 })}
+        $isError={!!errors.password}
+        data-testid="password-inp"
+      />
+      <AuthInput
+        name="repeatedPassword"
+        placeholder="Repeat password"
+        type="password"
+        ref={register({ required: true, validate: (val) => val === watch('password') })}
+        $isError={!!errors.repeatedPassword}
+        data-testid="repeatedPassword-inp"
+      />
+      <AuthButton name="Sing up" isMain callback={handleSubmit(onSubmit)} marginTop="2rem" />
+      <RedirectMessage>
+        Already have an account?
+        <RedirectButton onClick={() => setView(VIEWS.LOGIN)}>Log in</RedirectButton>
+      </RedirectMessage>
+    </>
+  );
+};
+
+export default Register;
