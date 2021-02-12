@@ -21,6 +21,7 @@ import usePost from '../../utils/usePost';
 export type PostType = {
   author: {
     username: string;
+    avatar: string;
   };
   uuid: string;
   text: string;
@@ -30,6 +31,7 @@ export type PostType = {
   commentCount: number;
   likeCount: number;
   isLiked: boolean;
+  avatar: string;
 };
 
 type PostProps = {
@@ -44,7 +46,7 @@ const Post = ({ postData }: PostProps) => {
   );
   return (
     <PostItem>
-      <Avatar />
+      <Avatar src={postData.author.avatar} />
       <PostDataWrapper>
         <PostDataHeader>
           <Username>{`@${postData.author.username}`}</Username>

@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import { LocalStorage } from '../../constants/authContextTypes';
 
-const getToken = () => localStorage.getItem(LocalStorage.TOKEN) || null;
+export const getToken = () => localStorage.getItem(LocalStorage.TOKEN) || null;
 
 export const isTokenValid = (token: string) => {
   const { exp }: any = jwtDecode(token);

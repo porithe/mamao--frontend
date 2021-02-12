@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 import SocialTable from '../../views/SocialTable/SocialTable';
 import Profile from '../../views/Profile/Profile';
+import ProfileSettings from '../../views/ProfileSettings/ProfileSettings';
 
 const Routes = () => (
   <Switch>
@@ -11,6 +12,9 @@ const Routes = () => (
     </Route>
     <Route path={ROUTES.PROFILE}>
       <Profile />
+    </Route>
+    <Route path={ROUTES.PROFILE_SETTINGS}>
+      <ProfileSettings />
     </Route>
   </Switch>
 );

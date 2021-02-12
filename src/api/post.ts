@@ -6,8 +6,8 @@ export default {
       text,
     });
   },
-  getTablePosts() {
-    return authenticatedAxios.get(`${process.env.REACT_APP_MAMAO_BACKEND_API}table?start=0`);
+  getTablePosts(start = 0) {
+    return authenticatedAxios.get(`${process.env.REACT_APP_MAMAO_BACKEND_API}table?start=${start}`);
   },
   likePost(postUuid: string) {
     return authenticatedAxios.get(
@@ -19,9 +19,9 @@ export default {
       `${process.env.REACT_APP_MAMAO_BACKEND_API}post/dislike/${postUuid}`,
     );
   },
-  findAll(username: string) {
+  findAll(username: string, start = 0) {
     return authenticatedAxios.get(
-      `${process.env.REACT_APP_MAMAO_BACKEND_API}post/findAll/${username}?limit=10&start=0`,
+      `${process.env.REACT_APP_MAMAO_BACKEND_API}post/findAll/${username}?limit=10&start=${start}`,
     );
   },
 };

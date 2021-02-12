@@ -30,6 +30,17 @@ export const StyledLink = styled(Link)`
   }
 `;
 
+export const StyledSettingsLink = styled(StyledLink)`
+  font-weight: 500;
+  font-size: 1rem;
+  margin-left: auto;
+  margin-right: 0.625rem;
+  @media (min-width: 768px) {
+    font-size: 1.15rem;
+    margin-right: 2rem;
+  }
+`;
+
 export const LogoutButton = styled.button`
   border: 2px solid ${COLORS.PURPLE};
   border-radius: 8px;

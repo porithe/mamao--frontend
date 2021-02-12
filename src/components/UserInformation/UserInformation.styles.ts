@@ -28,11 +28,10 @@ export const UserInformationHeader = styled.div`
   align-items: center;
 `;
 
-export const UserAvatar = styled.div`
+export const UserAvatar = styled.img`
   width: 70px;
   height: 70px;
   border-radius: 100%;
-  background-color: pink;
   @media (min-width: 768px) and (max-width: 1024px) {
     width: 75px;
     height: 75px;

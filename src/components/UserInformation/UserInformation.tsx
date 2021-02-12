@@ -41,7 +41,7 @@ const UserInformation = ({ userData }: UserInformationProps) => {
   return (
     <Wrapper>
       <UserInformationHeader>
-        <UserAvatar />
+        <UserAvatar src={userData.avatar} />
         <Username>{`@${userData.username}`}</Username>
         {AuthUsername !== username && (
           <FollowButton onClick={toggleFollow} isFollowed={isFollowed}>

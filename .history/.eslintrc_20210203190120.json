@@ -28,7 +28,7 @@
         "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
         "import/extensions": "off",
         "no-shadow": "off",
-        "no-unused-vars": "off",
+        "no-unused-vars": "warn",
         "spaced-comment": "warn"
     },
     "settings": {

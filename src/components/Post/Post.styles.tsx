@@ -11,8 +11,7 @@ export const PostItem = styled.li`
   border-bottom: 1px solid ${COLORS.GRAY};
 `;
 
-export const Avatar = styled.div`
-  background-color: pink;
+export const Avatar = styled.img`
   width: 55px;
   height: 55px;
   border-radius: 100%;

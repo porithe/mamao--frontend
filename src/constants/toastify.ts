@@ -14,4 +14,5 @@ export enum TOAST_MESSAGES {
   UNAUTHORIZED = 'Unauthorized!',
   USER_NOT_FOUND = 'User not found!',
   POST_ADDED = 'Post has been successfully added.',
+  UPDATED_PROFILE = 'Profile has been successfully updated.',
 }
